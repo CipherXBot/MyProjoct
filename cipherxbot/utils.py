@@ -8,13 +8,7 @@ from telethon import events
 
 from cipherxbot import CMD_LIST, LOAD_PLUG, SUDO_LIST, bot
 from cipherxbot.Configs import Config
-from cipherxbot.wraptools import (
-    am_i_admin,
-    ignore_bot,
-    ignore_fwd,
-    ignore_grp,
-    ignore_pm,
-)
+from cipherxbot.wraptools import am_i_admin, ignore_bot, ignore_fwd, ignore_grp, ignore_pm
 from var import Var
 
 sedprint = logging.getLogger("PLUGINS")
@@ -98,6 +92,9 @@ def load_module(shortname):
         import sys
         from pathlib import Path
 
+        import cipherxbot.plugins
+        import cipherxbot.utils
+
         path = Path(f"cipherxbot/plugins/{shortname}.py")
         name = "cipherxbot.plugins.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
@@ -124,7 +121,7 @@ def load_module(shortname):
         # support for uniborg
         sys.modules["uniborg.util"] = cipherxbot.utils
         sys.modules["cipherxbot.util"] = cipherxbot.utils
-        sys.modules["userbot.utils"] = cipherxbot.utils
+        sys.modules["cipherxbot.utils"] = cipherxbot.utils
         sys.modules["cipherxbot.plugins"] = cipherxbot.plugins
         mod.Config = Config
         mod.ignore_grp = ignore_grp()
@@ -248,7 +245,7 @@ def friday_on_cmd(pattern=None, **args):
     return events.NewMessage(**args)
 
 
-""" Userbot module for managing events.
+""" cipherxbot module for managing events.
  One of the main components of the cipherxbot. """
 
 import asyncio
