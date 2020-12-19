@@ -8,7 +8,13 @@ from telethon import events
 
 from cipherxbot import CMD_LIST, LOAD_PLUG, SUDO_LIST, bot
 from cipherxbot.Configs import Config
-from cipherxbot.wraptools import am_i_admin, ignore_bot, ignore_fwd, ignore_grp, ignore_pm
+from cipherxbot.wraptools import (
+    am_i_admin,
+    ignore_bot,
+    ignore_fwd,
+    ignore_grp,
+    ignore_pm,
+)
 from var import Var
 
 sedprint = logging.getLogger("PLUGINS")
@@ -91,9 +97,6 @@ def load_module(shortname):
         import importlib
         import sys
         from pathlib import Path
-
-        import userbot.plugins
-        import userbot.utils
 
         path = Path(f"cipherxbot/plugins/{shortname}.py")
         name = "cipherxbot.plugins.{}".format(shortname)
